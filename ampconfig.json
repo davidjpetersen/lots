@@ -1,0 +1,19 @@
+{
+  "dataServiceGeneratorVersion": "0.11.2",
+  "appInfo": {
+    "name": "Learning on the Spot",
+    "description": "",
+    "version": "dzoucgi1",
+    "id": "ckzrksfzz89143901s653p27lev",
+    "url": "https://app.amplication.com/ckzrksfzz89143901s653p27lev",
+    "settings": {
+      "dbHost": "localhost",
+      "dbName": "",
+      "dbPassword": "admin",
+      "dbPort": 5432,
+      "dbUser": "admin",
+      "appId": "ckzrksfzz89143901s653p27lev",
+      "authProvider": "Jwt"
+    }
+  }
+}
