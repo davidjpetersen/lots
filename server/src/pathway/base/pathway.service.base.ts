@@ -46,7 +46,6 @@ export class PathwayServiceBase {
   ): Promise<Pathway> {
     return this.prisma.pathway.delete(args);
   }
-
   async findObjects(
     parentId: string,
     args: Prisma.ObjectFindManyArgs
@@ -57,7 +56,6 @@ export class PathwayServiceBase {
       })
       .objects(args);
   }
-
   async getOwner(parentId: string): Promise<User | null> {
     return this.prisma.pathway
       .findUnique({

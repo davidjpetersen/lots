@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   Show,
   SimpleShowLayout,
@@ -10,7 +9,6 @@ import {
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
-
 import { PATHWAY_TITLE_FIELD } from "./PathwayTitle";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
 
