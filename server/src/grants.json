@@ -6,7 +6,43 @@
     "attributes": "*"
   },
   {
+    "role": "tenantOwner",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
@@ -18,7 +54,43 @@
     "attributes": "*"
   },
   {
+    "role": "tenantOwner",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -30,7 +102,43 @@
     "attributes": "*"
   },
   {
+    "role": "tenantOwner",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Pathway",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Pathway",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Pathway",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
     "resource": "Pathway",
     "action": "read:own",
     "attributes": "*"
@@ -42,7 +150,43 @@
     "attributes": "*"
   },
   {
+    "role": "tenantOwner",
+    "resource": "Pathway",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Pathway",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Pathway",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
+    "resource": "Pathway",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Pathway",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Pathway",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
     "resource": "Pathway",
     "action": "update:any",
     "attributes": "*"
@@ -54,8 +198,164 @@
     "attributes": "*"
   },
   {
+    "role": "tenantOwner",
+    "resource": "Pathway",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Pathway",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Pathway",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
     "role": "user",
     "resource": "Pathway",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Pathway",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Pathway",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Pathway",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Object",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Object",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Object",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Object",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Object",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Object",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Object",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Object",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Object",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Object",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Object",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Object",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Object",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Object",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Object",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Object",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Object",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "tenantOwner",
+    "resource": "Object",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "superAdmin",
+    "resource": "Object",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "teamOwner",
+    "resource": "Object",
     "action": "read:any",
     "attributes": "*"
   }

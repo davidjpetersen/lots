@@ -13,6 +13,10 @@ import { PathwayList } from "./pathway/PathwayList";
 import { PathwayCreate } from "./pathway/PathwayCreate";
 import { PathwayEdit } from "./pathway/PathwayEdit";
 import { PathwayShow } from "./pathway/PathwayShow";
+import { ObjectList } from "./object/ObjectList";
+import { ObjectCreate } from "./object/ObjectCreate";
+import { ObjectEdit } from "./object/ObjectEdit";
+import { ObjectShow } from "./object/ObjectShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -52,6 +56,13 @@ const App = (): React.ReactElement => {
           edit={PathwayEdit}
           create={PathwayCreate}
           show={PathwayShow}
+        />
+        <Resource
+          name="Object"
+          list={ObjectList}
+          edit={ObjectEdit}
+          create={ObjectCreate}
+          show={ObjectShow}
         />
       </Admin>
     </div>

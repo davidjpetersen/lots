@@ -11,12 +11,18 @@
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional, ValidateNested } from "class-validator";
+import {
+  IsDate,
+  IsString,
+  IsOptional,
+  IsEnum,
+  ValidateNested,
+} from "class-validator";
 import { Type } from "class-transformer";
-import { Object } from "../../object/base/Object";
-import { User } from "../../user/base/User";
+import { EnumObjectObjectType } from "./EnumObjectObjectType";
+import { Pathway } from "../../pathway/base/Pathway";
 @ObjectType()
-class Pathway {
+class Object {
   @ApiProperty({
     required: true,
   })
@@ -45,21 +51,23 @@ class Pathway {
   id!: string;
 
   @ApiProperty({
-    required: false,
-    type: () => [Object],
+    required: true,
+    enum: EnumObjectObjectType,
   })
-  @ValidateNested()
-  @Type(() => Object)
-  @IsOptional()
-  objects?: Array<Object>;
+  @IsEnum(EnumObjectObjectType)
+  @Field(() => EnumObjectObjectType, {
+    nullable: true,
+  })
+  objectType?: "Text" | "Image" | "Video";
 
   @ApiProperty({
-    required: true,
-    type: () => User,
+    required: false,
+    type: () => Pathway,
   })
   @ValidateNested()
-  @Type(() => User)
-  owner?: User;
+  @Type(() => Pathway)
+  @IsOptional()
+  pathway?: Pathway | null;
 
   @ApiProperty({
     required: true,
@@ -77,4 +85,4 @@ class Pathway {
   @Field(() => Date)
   updatedAt!: Date;
 }
-export { Pathway };
+export { Object };
