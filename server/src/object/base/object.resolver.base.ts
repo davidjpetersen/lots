@@ -19,33 +19,31 @@ import * as gqlUserRoles from "../../auth/gqlUserRoles.decorator";
 import * as abacUtil from "../../auth/abac.util";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
-import { CreatePathwayArgs } from "./CreatePathwayArgs";
-import { UpdatePathwayArgs } from "./UpdatePathwayArgs";
-import { DeletePathwayArgs } from "./DeletePathwayArgs";
-import { PathwayFindManyArgs } from "./PathwayFindManyArgs";
-import { PathwayFindUniqueArgs } from "./PathwayFindUniqueArgs";
-import { Pathway } from "./Pathway";
-import { ObjectFindManyArgs } from "../../object/base/ObjectFindManyArgs";
-import { Object } from "../../object/base/Object";
-import { User } from "../../user/base/User";
-import { PathwayService } from "../pathway.service";
+import { CreateObjectArgs } from "./CreateObjectArgs";
+import { UpdateObjectArgs } from "./UpdateObjectArgs";
+import { DeleteObjectArgs } from "./DeleteObjectArgs";
+import { ObjectFindManyArgs } from "./ObjectFindManyArgs";
+import { ObjectFindUniqueArgs } from "./ObjectFindUniqueArgs";
+import { Object } from "./Object";
+import { Pathway } from "../../pathway/base/Pathway";
+import { ObjectService } from "../object.service";
 
-@graphql.Resolver(() => Pathway)
+@graphql.Resolver(() => Object)
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
-export class PathwayResolverBase {
+export class ObjectResolverBase {
   constructor(
-    protected readonly service: PathwayService,
+    protected readonly service: ObjectService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
   @graphql.Query(() => MetaQueryPayload)
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "read",
     possession: "any",
   })
-  async _pathwaysMeta(
-    @graphql.Args() args: PathwayFindManyArgs
+  async _objectsMeta(
+    @graphql.Args() args: ObjectFindManyArgs
   ): Promise<MetaQueryPayload> {
     const results = await this.service.count({
       ...args,
@@ -57,41 +55,41 @@ export class PathwayResolverBase {
     };
   }
 
-  @graphql.Query(() => [Pathway])
+  @graphql.Query(() => [Object])
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "read",
     possession: "any",
   })
-  async pathways(
-    @graphql.Args() args: PathwayFindManyArgs,
+  async objects(
+    @graphql.Args() args: ObjectFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Pathway[]> {
+  ): Promise<Object[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Pathway",
+      resource: "Object",
     });
     const results = await this.service.findMany(args);
     return results.map((result) => permission.filter(result));
   }
 
-  @graphql.Query(() => Pathway, { nullable: true })
+  @graphql.Query(() => Object, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "read",
     possession: "own",
   })
-  async pathway(
-    @graphql.Args() args: PathwayFindUniqueArgs,
+  async object(
+    @graphql.Args() args: ObjectFindUniqueArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Pathway | null> {
+  ): Promise<Object | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "own",
-      resource: "Pathway",
+      resource: "Object",
     });
     const result = await this.service.findOne(args);
     if (result === null) {
@@ -100,21 +98,21 @@ export class PathwayResolverBase {
     return permission.filter(result);
   }
 
-  @graphql.Mutation(() => Pathway)
+  @graphql.Mutation(() => Object)
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "create",
     possession: "any",
   })
-  async createPathway(
-    @graphql.Args() args: CreatePathwayArgs,
+  async createObject(
+    @graphql.Args() args: CreateObjectArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Pathway> {
+  ): Promise<Object> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "create",
       possession: "any",
-      resource: "Pathway",
+      resource: "Object",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(
       permission,
@@ -128,7 +126,7 @@ export class PathwayResolverBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Pathway"} creation is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"Object"} creation is forbidden for roles: ${roles}`
       );
     }
     // @ts-ignore
@@ -137,28 +135,30 @@ export class PathwayResolverBase {
       data: {
         ...args.data,
 
-        owner: {
-          connect: args.data.owner,
-        },
+        pathway: args.data.pathway
+          ? {
+              connect: args.data.pathway,
+            }
+          : undefined,
       },
     });
   }
 
-  @graphql.Mutation(() => Pathway)
+  @graphql.Mutation(() => Object)
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "update",
     possession: "any",
   })
-  async updatePathway(
-    @graphql.Args() args: UpdatePathwayArgs,
+  async updateObject(
+    @graphql.Args() args: UpdateObjectArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Pathway | null> {
+  ): Promise<Object | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "update",
       possession: "any",
-      resource: "Pathway",
+      resource: "Object",
     });
     const invalidAttributes = abacUtil.getInvalidAttributes(
       permission,
@@ -172,7 +172,7 @@ export class PathwayResolverBase {
         .map((role: string) => JSON.stringify(role))
         .join(",");
       throw new apollo.ApolloError(
-        `providing the properties: ${properties} on ${"Pathway"} update is forbidden for roles: ${roles}`
+        `providing the properties: ${properties} on ${"Object"} update is forbidden for roles: ${roles}`
       );
     }
     try {
@@ -182,9 +182,11 @@ export class PathwayResolverBase {
         data: {
           ...args.data,
 
-          owner: {
-            connect: args.data.owner,
-          },
+          pathway: args.data.pathway
+            ? {
+                connect: args.data.pathway,
+              }
+            : undefined,
         },
       });
     } catch (error) {
@@ -197,15 +199,15 @@ export class PathwayResolverBase {
     }
   }
 
-  @graphql.Mutation(() => Pathway)
+  @graphql.Mutation(() => Object)
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "delete",
     possession: "any",
   })
-  async deletePathway(
-    @graphql.Args() args: DeletePathwayArgs
-  ): Promise<Pathway | null> {
+  async deleteObject(
+    @graphql.Args() args: DeleteObjectArgs
+  ): Promise<Object | null> {
     try {
       // @ts-ignore
       return await this.service.delete(args);
@@ -219,49 +221,23 @@ export class PathwayResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => [Object])
+  @graphql.ResolveField(() => Pathway, { nullable: true })
   @nestAccessControl.UseRoles({
-    resource: "Pathway",
+    resource: "Object",
     action: "read",
     possession: "any",
   })
-  async objects(
-    @graphql.Parent() parent: Pathway,
-    @graphql.Args() args: ObjectFindManyArgs,
+  async pathway(
+    @graphql.Parent() parent: Object,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Object[]> {
+  ): Promise<Pathway | null> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
-      resource: "Object",
+      resource: "Pathway",
     });
-    const results = await this.service.findObjects(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results.map((result) => permission.filter(result));
-  }
-
-  @graphql.ResolveField(() => User, { nullable: true })
-  @nestAccessControl.UseRoles({
-    resource: "Pathway",
-    action: "read",
-    possession: "any",
-  })
-  async owner(
-    @graphql.Parent() parent: Pathway,
-    @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<User | null> {
-    const permission = this.rolesBuilder.permission({
-      role: userRoles,
-      action: "read",
-      possession: "any",
-      resource: "User",
-    });
-    const result = await this.service.getOwner(parent.id);
+    const result = await this.service.getPathway(parent.id);
 
     if (!result) {
       return null;

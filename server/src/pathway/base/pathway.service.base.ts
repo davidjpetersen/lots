@@ -10,7 +10,7 @@
 //------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, Pathway, User } from "@prisma/client";
+import { Prisma, Pathway, Object, User } from "@prisma/client";
 
 export class PathwayServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -46,7 +46,16 @@ export class PathwayServiceBase {
   ): Promise<Pathway> {
     return this.prisma.pathway.delete(args);
   }
-
+  async findObjects(
+    parentId: string,
+    args: Prisma.ObjectFindManyArgs
+  ): Promise<Object[]> {
+    return this.prisma.pathway
+      .findUnique({
+        where: { id: parentId },
+      })
+      .objects(args);
+  }
   async getOwner(parentId: string): Promise<User | null> {
     return this.prisma.pathway
       .findUnique({

@@ -9,22 +9,13 @@
 //
 //------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional, ValidateNested } from "class-validator";
+import { IsString, IsOptional, ValidateNested } from "class-validator";
+import { PathwayWhereUniqueInput } from "../../pathway/base/PathwayWhereUniqueInput";
 import { Type } from "class-transformer";
-import { Object } from "../../object/base/Object";
-import { User } from "../../user/base/User";
-@ObjectType()
-class Pathway {
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
-
+@InputType()
+class ObjectCreateInput {
   @ApiProperty({
     required: false,
     type: String,
@@ -34,32 +25,19 @@ class Pathway {
   @Field(() => String, {
     nullable: true,
   })
-  description!: string | null;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+  description?: string | null;
 
   @ApiProperty({
     required: false,
-    type: () => [Object],
+    type: () => PathwayWhereUniqueInput,
   })
   @ValidateNested()
-  @Type(() => Object)
+  @Type(() => PathwayWhereUniqueInput)
   @IsOptional()
-  objects?: Array<Object>;
-
-  @ApiProperty({
-    required: true,
-    type: () => User,
+  @Field(() => PathwayWhereUniqueInput, {
+    nullable: true,
   })
-  @ValidateNested()
-  @Type(() => User)
-  owner?: User;
+  pathway?: PathwayWhereUniqueInput | null;
 
   @ApiProperty({
     required: true,
@@ -68,13 +46,5 @@ class Pathway {
   @IsString()
   @Field(() => String)
   title!: string;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
 }
-export { Pathway };
+export { ObjectCreateInput };

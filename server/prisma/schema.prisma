@@ -23,8 +23,19 @@ model Pathway {
   createdAt   DateTime @default(now())
   description String?
   id          String   @id @default(cuid())
+  objects     Object[]
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     String
+  title       String
+  updatedAt   DateTime @updatedAt
+}
+
+model Object {
+  createdAt   DateTime @default(now())
+  description String?
+  id          String   @id @default(cuid())
+  pathway     Pathway? @relation(fields: [pathwayId], references: [id])
+  pathwayId   String?
   title       String
   updatedAt   DateTime @updatedAt
 }

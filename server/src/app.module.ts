@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
 import { PathwayModule } from "./pathway/pathway.module";
+import { ObjectModule } from "./object/object.module";
 import { ACLModule } from "./auth/acl.module";
 import { AuthModule } from "./auth/auth.module";
 import { HealthModule } from "./health/health.module";
@@ -16,6 +17,7 @@ import { GraphQLModule } from "@nestjs/graphql";
   imports: [
     UserModule,
     PathwayModule,
+    ObjectModule,
     ACLModule,
     AuthModule,
     HealthModule,

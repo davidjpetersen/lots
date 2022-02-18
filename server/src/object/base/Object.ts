@@ -13,10 +13,9 @@ import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, IsString, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
-import { Object } from "../../object/base/Object";
-import { User } from "../../user/base/User";
+import { Pathway } from "../../pathway/base/Pathway";
 @ObjectType()
-class Pathway {
+class Object {
   @ApiProperty({
     required: true,
   })
@@ -46,20 +45,12 @@ class Pathway {
 
   @ApiProperty({
     required: false,
-    type: () => [Object],
+    type: () => Pathway,
   })
   @ValidateNested()
-  @Type(() => Object)
+  @Type(() => Pathway)
   @IsOptional()
-  objects?: Array<Object>;
-
-  @ApiProperty({
-    required: true,
-    type: () => User,
-  })
-  @ValidateNested()
-  @Type(() => User)
-  owner?: User;
+  pathway?: Pathway | null;
 
   @ApiProperty({
     required: true,
@@ -77,4 +68,4 @@ class Pathway {
   @Field(() => Date)
   updatedAt!: Date;
 }
-export { Pathway };
+export { Object };
